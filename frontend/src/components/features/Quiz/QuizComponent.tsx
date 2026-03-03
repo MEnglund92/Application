@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useUser } from '../../../hooks/useUser'
 import { useApi } from '../../../hooks/useApi'
 import { apiService } from '../../../services/api'
-import { QuizResponse, QuizQuestion } from '../../../types'
+import { QuizResponse } from '../../../types'  // Removed unused QuizQuestion import
 import Card from '../../../components/ui/Card'
 import Button from '../../../components/ui/Button'
 import Badge from '../../../components/ui/Badge'
@@ -65,14 +65,14 @@ const QuizComponent: React.FC = () => {
 
         execute(
             () => apiService.submitQuiz(submissions),
-            (result) => {
+            (result: any) => {  // Added type annotation for result
                 const correctCount = answers.filter((answer, index) =>
                     answer === quiz.questions[index].correctAnswer
                 ).length
                 setScore(correctCount)
                 setShowResults(true)
-                addXp(result.xpGained)
-                toast.success(`Quiz completed! Score: ${correctCount}/${quiz.questions.length} | +${result.xpGained} XP`)
+                addXp(result.xpGained || 25)  // Added fallback value
+                toast.success(`Quiz completed! Score: ${correctCount}/${quiz.questions.length} | +${result.xpGained || 25} XP`)
             }
         )
     }

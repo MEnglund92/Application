@@ -7,7 +7,7 @@ import Card from '../../../components/ui/Card'
 import Input from '../../../components/ui/Input'
 import Button from '../../../components/ui/Button'
 import Badge from '../../../components/ui/Badge'
-import { Search, FileText, ExternalLink, Loader2 } from 'lucide-react'
+import { Search, FileText, ExternalLink } from 'lucide-react'  // Removed unused Loader2
 import toast from 'react-hot-toast'
 
 const SearchBar: React.FC = () => {
@@ -158,7 +158,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({ result }) => {
                         {result.source}
                     </Badge>
                     {result.page && (
-                        <Badge variant="secondary" size="sm">
+                        <Badge variant="default" size="sm">  {/* Changed from secondary to default */}
                             Page {result.page}
                         </Badge>
                     )}

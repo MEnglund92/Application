@@ -11,7 +11,7 @@ import {
     HardDrive,
     Activity,
     Clock,
-    TrendingUp,
+    Search,
 } from 'lucide-react'
 
 const DashboardView: React.FC = () => {
@@ -35,7 +35,7 @@ const DashboardView: React.FC = () => {
 
     if (error && !stats) {
         return (
-            <Card variant="danger" className="text-center p-8">
+            <Card variant="default" className="text-center p-8">
                 <p className="text-danger">Error loading dashboard: {error}</p>
             </Card>
         )

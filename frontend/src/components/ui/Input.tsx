@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({
                 className={cn(
                     baseClasses,
                     variants[variant],
-                    icon && 'pl-10',
+                    icon ? 'pl-10' : '',  // Fixed: use ternary instead of &&
                     error && 'border-danger focus:ring-danger',
                     className
                 )}
