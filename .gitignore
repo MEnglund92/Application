@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+__pycache__/
+.env
+.DS_Store
+dist/
+coverage/
+.pytest_cache/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Docker
+docker-compose.override.yml
