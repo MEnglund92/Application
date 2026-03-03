@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-primary-50 text-primary-900 font-sans;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        min-height: 100vh;
+    }
+
+    * {
+        @apply border-primary-200;
+    }
+}
+
+@layer components {
+    .glass-effect {
+        @apply bg-primary-100/10 backdrop-blur-md border border-primary-200/20;
+    }
+
+    .neon-glow {
+        @apply shadow-[0_0_10px_rgba(139, 92, 246, 0.5), 0_0_20px_rgba(139, 92, 246, 0.3)];
+    }
+
+    .gaming-button {
+        @apply relative overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95;
+    }
+
+    .gaming-button::before {
+        content: '';
+        @apply absolute inset-0 bg-gradient-to-r from-accent-500/20 to-accent-600/20 opacity-0 transition-opacity duration-300;
+    }
+
+    .gaming-button:hover::before {
+        @apply opacity-100;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-primary-50;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-primary-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-400;
+}
