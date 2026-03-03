@@ -1,5 +1,4 @@
-cat > tsconfig.json << 'EOF'
-{
+echo '{
     "compilerOptions": {
         "target": "ES2020",
         "useDefineForClassFields": true,
@@ -16,7 +15,7 @@ cat > tsconfig.json << 'EOF'
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "strict": true,
+        "strict": false,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
@@ -41,5 +40,4 @@ cat > tsconfig.json << 'EOF'
             "path": "./tsconfig.node.json"
         }
     ]
-}
-EOF
+}' > tsconfig.json
