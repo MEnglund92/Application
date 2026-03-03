@@ -15,5 +15,10 @@ export default defineConfig({
         alias: {
             '@': '/src'
         }
+    },
+    esbuild: {
+        loader: "jsx",
+        include: /src\/.*\.[tj]sx?$/,
+        exclude: []
     }
 })
