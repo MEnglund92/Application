@@ -11,7 +11,7 @@ services:
     volumes:
       # ChromaDB data persistence
       - ./backend/data:/app/data
-      # Logs persistence
+      # Logs persistence  
       - ./backend/logs:/app/logs
       # Source code for development
       - ./backend/app:/app/app
@@ -53,4 +53,4 @@ networks:
   rag-network:
     driver: bridge
 
-# REMOVE the volumes section entirely - it's causing conflicts
+# REMOVE the entire volumes section that was causing conflicts
