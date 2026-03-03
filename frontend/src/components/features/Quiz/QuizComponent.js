@@ -69,8 +69,8 @@ var QuizComponent = function () {
             }).length;
             setScore(correctCount);
             setShowResults(true);
-            addXp(result.xpGained);
-            react_hot_toast_1.default.success("Quiz completed! Score: ".concat(correctCount, "/").concat(quiz.questions.length, " | +").concat(result.xpGained, " XP"));
+            addXp(result.xpGained || 25); // Added fallback value
+            react_hot_toast_1.default.success("Quiz completed! Score: ".concat(correctCount, "/").concat(quiz.questions.length, " | +").concat(result.xpGained || 25, " XP"));
         });
     };
     if (!quiz) {

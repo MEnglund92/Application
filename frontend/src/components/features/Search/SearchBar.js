@@ -44,7 +44,7 @@ var Card_1 = require("../../../components/ui/Card");
 var Input_1 = require("../../../components/ui/Input");
 var Button_1 = require("../../../components/ui/Button");
 var Badge_1 = require("../../../components/ui/Badge");
-var lucide_react_1 = require("lucide-react");
+var lucide_react_1 = require("lucide-react"); // Removed unused Loader2
 var react_hot_toast_1 = require("react-hot-toast");
 var SearchBar = function () {
     var addXp = (0, useUser_1.useUser)().addXp;
@@ -164,7 +164,7 @@ var SearchResultItem = function (_a) {
                     <Badge_1.default variant="accent" size="sm">
                         {result.source}
                     </Badge_1.default>
-                    {result.page && (<Badge_1.default variant="secondary" size="sm">
+                    {result.page && (<Badge_1.default variant="default" size="sm">  {/* Changed from secondary to default */}
                             Page {result.page}
                         </Badge_1.default>)}
                 </div>

@@ -1,4 +1,11 @@
-echo '{
+cd "/Users/mattias/Documents/GitHub/Application/frontend"
+
+# Remove the corrupted file
+rm tsconfig.json
+
+# Create a clean, working tsconfig.json
+cat > tsconfig.json << 'EOF'
+{
     "compilerOptions": {
         "target": "ES2020",
         "useDefineForClassFields": true,
@@ -40,4 +47,5 @@ echo '{
             "path": "./tsconfig.node.json"
         }
     ]
-}' > tsconfig.json
+}
+EOF

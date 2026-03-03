@@ -18,7 +18,7 @@ var DashboardView = function () {
             </div>);
     }
     if (error && !stats) {
-        return (<Card_1.default variant="danger" className="text-center p-8">
+        return (<Card_1.default variant="default" className="text-center p-8">
                 <p className="text-danger">Error loading dashboard: {error}</p>
             </Card_1.default>);
     }
@@ -103,7 +103,7 @@ var DashboardView = function () {
                 <div className="space-y-3">
                     {stats.lastQueries.map(function (query, index) { return (<div key={index} className="flex items-center justify-between p-3 rounded-lg bg-primary-100/30">
                             <div className="flex items-center space-x-3">
-                                <Search className="h-4 w-4 text-primary-500"/>
+                                <lucide_react_1.Search className="h-4 w-4 text-primary-500"/>
                                 <span className="text-primary-900">{query.query}</span>
                             </div>
                             <span className="text-sm text-primary-600">

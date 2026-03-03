@@ -25,7 +25,8 @@ var Input = function (_a) {
             {icon && (<div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500">
                     {icon}
                 </div>)}
-            <input className={(0, helpers_1.cn)(baseClasses, variants[variant], icon && 'pl-10', error && 'border-danger focus:ring-danger', className)} {...props}/>
+            <input className={(0, helpers_1.cn)(baseClasses, variants[variant], icon ? 'pl-10' : '', // Fixed: use ternary instead of &&
+        error && 'border-danger focus:ring-danger', className)} {...props}/>
             {error && (<p className="mt-1 text-sm text-danger">{error}</p>)}
         </div>);
 };
