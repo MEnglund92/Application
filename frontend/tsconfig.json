@@ -19,6 +19,9 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
             "@/*": [
@@ -27,7 +30,7 @@
         }
     },
     "include": [
-        "src"
+        "src/**/*"
     ],
     "references": [
         {
