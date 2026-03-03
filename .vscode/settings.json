@@ -1,0 +1,16 @@
+{
+  "python.defaultInterpreterPath": "./backend/.venv/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "docker.compose.showAdvancedConfig": true,
+  "docker.compose.alwaysServiceUp": ["backend", "frontend"],
+  "editor.formatOnSave": true,
+  "typescript.preferences.importModuleSpecifier": "relative"
+}
