@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { create } from 'zustand'
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
-import { Terminal, Upload, Play, FileText } from 'lucide-react'
+import { Terminal, RefreshCw, Play } from 'lucide-react'
 
 const useStore = create((set) => ({
   xp: 0,
@@ -16,23 +16,28 @@ export default function App() {
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('')
+  const [repoStatus, setRepoStatus] = useState({})
 
-  const handleUpload = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-    setStatus('UPLOADING...')
-    const formData = new FormData()
-    formData.append('file', file)
+  useEffect(() => {
+    checkStatus()
+  }, [])
+
+  const checkStatus = async () => {
     try {
-        setLoading(true)
-        const res = await axios.post('/api/upload', formData)
-        addXp(res.data.xp_gained)
-        setStatus('UPLOAD COMPLETE')
-        alert('File Processed Successfully')
-    } catch (err) { 
-        setStatus('ERROR')
-        alert('Upload Failed') 
-    } finally { setLoading(false) }
+      const res = await axios.get('/api/status')
+      setRepoStatus(res.data)
+    } catch (e) { console.error(e) }
+  }
+
+  const handleReload = async () => {
+    setStatus('RELOADING...')
+    try {
+      await axios.get('/api/reload')
+      setStatus('RELOAD COMPLETE')
+      checkStatus()
+    } catch (e) {
+      setStatus('RELOAD FAILED')
+    }
   }
 
   const handleChat = async () => {
@@ -41,12 +46,12 @@ export default function App() {
     setHistory(newHist)
     setQuery('')
     try {
-        setLoading(true)
-        const res = await axios.post('/api/chat', { question: query })
-        setHistory([...newHist, { role: 'bot', content: res.data.response }])
-        addXp(res.data.xp_gained)
+      setLoading(true)
+      const res = await axios.post('/api/chat', { question: query })
+      setHistory([...newHist, { role: 'bot', content: res.data.response }])
+      addXp(res.data.xp_gained)
     } catch (err) { 
-        setHistory([...newHist, { role: 'err', content: "Connection Error" }]) 
+      setHistory([...newHist, { role: 'err', content: "Connection Error" }]) 
     } finally { setLoading(false) }
   }
 
@@ -59,13 +64,18 @@ export default function App() {
       
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="p-4 border border-green-800 rounded bg-green-900/10">
-            <h2 className="mb-4 font-bold flex gap-2"><Upload size={16}/> INGEST</h2>
-            <div className="border-2 border-dashed border-green-800 p-4 text-center cursor-pointer relative">
-                <input type="file" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer"/>
-                <FileText className="mx-auto mb-2"/>
-                <div className="text-xs">DROP PDF HERE</div>
+            <h2 className="mb-4 font-bold flex gap-2"><RefreshCw size={16}/> REPO</h2>
+            <div className="text-xs mb-4 opacity-70">
+                {repoStatus.github_repo || "No repo configured"}
             </div>
+            <button onClick={handleReload} disabled={loading}
+                    className="w-full bg-green-700 text-black font-bold py-2 px-4 rounded">
+                RELOAD FROM GITHUB
+            </button>
             <div className="mt-2 text-xs text-center">{status}</div>
+            <div className="mt-4 text-xs">
+                Status: {repoStatus.vector_store_ready ? "✅ Ready" : "⏳ Loading..."}
+            </div>
         </div>
 
         <div className="md:col-span-3 border border-green-800 rounded h-[600px] flex flex-col">
